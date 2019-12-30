@@ -1,0 +1,17 @@
+{
+  "name": "YouTube Recommendation Decline Extension",
+  "short_name": "YT Decline",
+  "version": "1.0.0",
+  "description": "Declines video recommendations from YouTube to help lessen procrastination.",
+  "icons": {
+    "16": "images/icon_16.png",
+    "128": "images/icon_128.png",
+    "512": "images/icon_512.png"
+  },
+  "content_scripts": [{
+      "matches": ["*://*.youtube.com/*"],
+      "all_frames": true,
+      "js":      ["js/contentScript.js"]
+  }],
+  "manifest_version": 2
+}
