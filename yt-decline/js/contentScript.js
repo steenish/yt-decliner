@@ -1,17 +1,16 @@
 console.log("Youtube Decline running.")
 
-var hideTags = ["ytd-two-column-browse-results-renderer"]
-var hideIds =  ["related"]
+var hideTags =         ["ytd-two-column-browse-results-renderer"]
+var hideIds =          ["related"]
+var hideClassnames =   ["html5-endscreen ytp-player-content videowall-endscreen ytp-endscreen-paginate ytp-show-tiles"]
+
 var ignoreURLStrings = ["subscriptions",
                         "history",
                         "playlist",
                         "library"]
 
 function declineVideos() {
-  console.log("Declining videos.")
-
   if (!ignoreURL()) {
-
     // Hide by tag name.
     for (tag of hideTags) {
       var elements = document.getElementsByTagName(tag)
@@ -30,8 +29,17 @@ function declineVideos() {
         element.style.display = "none"
       }
     }
+
+    // Hide by class name.
+    for (name of hideClassnames) {
+      var elements = document.getElementsByClassName(name)
+      for (element of elements) {
+        if (element != null) {
+          element.style.display = "none"
+        }
+      }
+    }
   }
-  console.log("Declined recommended videos.")
 }
 
 function ignoreURL() {
@@ -44,6 +52,8 @@ function ignoreURL() {
   }
   return ignore
 }
+
+console.log("Started declining recommended videos every second.")
 
 // Repeat decline every second.
 setInterval(declineVideos, 1000)
