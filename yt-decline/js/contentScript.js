@@ -2,11 +2,8 @@ console.log("Youtube Decline running.")
 
 var hideTags =         ["ytd-two-column-browse-results-renderer"]
 var hideIds =          ["related"]
-var hideClassnames =   ["html5-endscreen ytp-player-content videowall-endscreen ytp-endscreen-paginate ytp-show-tiles",
-                        "ytp-ce-element ytp-ce-video ytp-ce-top-left-quad ytp-ce-size-640 ytp-ce-element-show",
-                        "ytp-ce-element ytp-ce-video ytp-ce-top-right-quad ytp-ce-size-640 ytp-ce-element-show",
-                        "ytp-ce-element ytp-ce-video ytp-ce-bottom-left-quad ytp-ce-size-640 ytp-ce-element-show",
-                        "ytp-ce-element ytp-ce-video ytp-ce-bottom-right-quad ytp-ce-size-640 ytp-ce-element-show"]
+var hideClassnames =   [/ytp-ce-element ytp-ce-video ytp-ce-((top)|(bottom))-((left)|(right))-quad ytp-ce-size-\d+ ytp-ce-element-show/,
+                        /ytp-endscreen-content/]
 
 var ignoreURLStrings = ["subscriptions",
                         "history",
@@ -63,12 +60,15 @@ function operateOnVideos(operation) {
     }
   }
 
-  // Operate by class name.
-  for (name of hideClassnames) {
-    var elements = document.getElementsByClassName(name)
-    for (element of elements) {
-      if (element != null) {
-        operation(element)
+  // Operate by class name. These are regular expressions.
+  for (pattern of hideClassnames) {
+    var allDivs = document.getElementsByTagName('div');
+
+    for (var i = 0; i < allDivs.length; i++) {
+      var div = allDivs[i];
+
+      if (div.className.match(pattern)) {
+        operation(div)
       }
     }
   }
