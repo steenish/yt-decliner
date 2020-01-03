@@ -1,4 +1,4 @@
-console.log("Youtube Decline running.")
+console.log("Youtube Decliner running.")
 
 var hideTags =         ["ytd-two-column-browse-results-renderer"]
 var hideIds =          ["related"]

@@ -1,4 +1,4 @@
-# YouTube Recommendation Decline Extension
+# YouTube Recommendation Decliner
 An extension that removes recommended videos from YouTube, making it harder to procrastinate for hours.
 
 ### Installation
