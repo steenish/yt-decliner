@@ -11,10 +11,10 @@ var ignoreURLStrings = ["subscriptions",
                         "library",
                         "user"]
 
-console.log("Started declining recommended videos every second.")
+console.log("Started declining recommended videos every half second.")
 
 // Repeat decline every second.
-setInterval(declineVideos, 1000)
+setInterval(declineVideos, 500)
 
 // Hides videos.
 function declineVideos() {
