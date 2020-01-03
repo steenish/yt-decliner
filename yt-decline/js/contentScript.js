@@ -8,7 +8,8 @@ var hideClassnames =   [/ytp-ce-element ytp-ce-video ytp-ce-((top)|(bottom))-((l
 var ignoreURLStrings = ["subscriptions",
                         "history",
                         "playlist",
-                        "library"]
+                        "library",
+                        "user"]
 
 console.log("Started declining recommended videos every second.")
 
