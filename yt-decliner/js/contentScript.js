@@ -9,7 +9,8 @@ var ignoreURLStrings = ["subscriptions",
                         "history",
                         "playlist",
                         "library",
-                        "user"]
+                        "user",
+                        "channel"]
 
 console.log("Started declining recommended videos every half second.")
 
