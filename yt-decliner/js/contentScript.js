@@ -2,8 +2,8 @@ console.log("Youtube Decliner running.")
 
 var hideTags =         ["ytd-two-column-browse-results-renderer"]
 var hideIds =          ["related"]
-var hideClassnames =   [/ytp-ce-element ytp-ce-video ytp-ce-((top)|(bottom))-((left)|(right))-quad ytp-ce-size-\d+ ytp-ce-element-show/,
-                        /ytp-endscreen-content/]
+var hideClassnames =   ["ytp-ce-element",
+                        "ytp-endscreen-content"]
 
 var ignoreURLStrings = ["subscriptions",
                         "history",
@@ -17,38 +17,39 @@ console.log("Started declining recommended videos every half second.")
 // Repeat decline every second.
 setInterval(declineVideos, 500)
 
-// Hides videos.
-function declineVideos() {
-  // If the URL should not be ignored, hide the videos.
-  if (!ignoreURL()) {
-    operateOnVideos(function(element) {element.style.visibility = "hidden"})
-  } else { // Otherwise, show the videos.
-    operateOnVideos(function(element) {element.style.visibility = "visible"})
-  }
-}
-
+//Used for checking if common tags should be ignored on a certain URL.
 // Returns true if videos should not be hidden on the site.
 function ignoreURL() {
   var ignore = false
   var href = window.location.href
 
   for (string of ignoreURLStrings) {
-    if (href.indexOf(string) > -1) {
+    if (contains(href, string)) {
       ignore = true
     }
   }
   return ignore
 }
 
+// Returns true if string contains the substring.
+function contains(string, substring) {
+  return string.indexOf(substring) > -1
+}
+
 // Performs the given operation on all elements that are covered by the arrays.
 // The operation parameter must be a function that takes a single argument.
-function operateOnVideos(operation) {
+function declineVideos() {
   // Operate by tag name.
   for (tag of hideTags) {
     var elements = document.getElementsByTagName(tag)
     for (element of elements) {
       if (element != null) {
-        operation(element)
+        // Unhide tags in ignored URLs
+        if (ignoreURL()) {
+          element.style.visibility = "visible"
+        } else {
+          element.style.visibility = "hidden"
+        }
       }
     }
   }
@@ -58,19 +59,19 @@ function operateOnVideos(operation) {
     var element = document.getElementById(id)
 
     if (element != null) {
-      operation(element)
+      element.style.visibility = "hidden"
     }
   }
 
-  // Operate by class name. These are regular expressions.
-  for (pattern of hideClassnames) {
+  // Operate by class name on divs.
+  for (name of hideClassnames) {
     var allDivs = document.getElementsByTagName('div');
 
     for (var i = 0; i < allDivs.length; i++) {
       var div = allDivs[i];
 
-      if (div.className.match(pattern)) {
-        operation(div)
+      if (contains(div.className, name)) {
+        div.style.visibility = "hidden"
       }
     }
   }
