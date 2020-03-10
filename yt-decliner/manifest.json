@@ -1,7 +1,7 @@
 {
   "name": "YouTube Recommendation Decliner",
   "short_name": "YT Decliner",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Declines video recommendations from YouTube to help lessen procrastination.",
   "icons": {
     "16": "images/icon_16.png",
