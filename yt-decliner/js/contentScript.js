@@ -17,7 +17,10 @@ var ignoreURLStrings =
     "/c/",
     "account",
     "purchases",
-    "post"]
+    "post",
+    "premium",
+    "storefront",
+    "paid_memberships"]
 
 // Add listener to listen for extension toggling.
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
