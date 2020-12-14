@@ -14,7 +14,10 @@ var ignoreURLStrings =
     "user",
     "channel",
     "my_videos",
-    "/c/"]
+    "/c/",
+    "settings",
+    "purchases",
+    "post"]
 
 // Add listener to listen for extension toggling.
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
