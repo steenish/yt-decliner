@@ -15,7 +15,7 @@ var ignoreURLStrings =
     "channel",
     "my_videos",
     "/c/",
-    "settings",
+    "account",
     "purchases",
     "post"]
 
