@@ -11,6 +11,12 @@ window.onload = function () {
             }
 
             chrome.tabs.sendMessage(tabs[0].id, { action: "toggle" }, function (response) {
+                let lastError = chrome.runtime.lastError;
+                if (lastError) {
+                    console.log(lastError.message);
+                    return;
+                }
+
                 if (response.enabled) {
                     chrome.browserAction.setIcon({ path: "/images/icon_128.png" });
                 } else {
