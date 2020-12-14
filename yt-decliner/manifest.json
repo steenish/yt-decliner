@@ -1,16 +1,24 @@
 {
   "name": "YouTube Recommendation Decliner",
   "short_name": "YT Decliner",
-  "version": "1.0.8",
+  "version": "1.1.0",
+  "manifest_version": 2,
   "description": "Declines video recommendations from YouTube to help lessen procrastination.",
   "icons": {
-    "16": "images/icon_16.png",
-    "128": "images/icon_128.png"
+    "16": "/images/icon_16.png",
+    "128": "/images/icon_128.png"
   },
   "content_scripts": [{
       "matches": ["*://*.youtube.com/*"],
       "all_frames": true,
-      "js":      ["js/contentScript.js"]
+      "js":      ["/js/contentScript.js"]
   }],
-  "manifest_version": 2
+  "browser_action": {
+    "default_icon": "/images/icon_128.png",
+    "default_popup": "/html/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
 }
